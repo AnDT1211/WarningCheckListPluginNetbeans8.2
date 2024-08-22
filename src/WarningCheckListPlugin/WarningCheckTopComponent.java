@@ -161,12 +161,15 @@ public final class WarningCheckTopComponent extends TopComponent {
             String sbs = document.getText(0, document.getLength());
             getInfo(sbs);
 
-            int lines = sbs.split("\n").length;
+            String[] linesStr = sbs.split("\n");
+            int lines = linesStr.length;
             DefaultListModel lineList = new DefaultListModel();
             for (int i = 0; i <= lines; i++) {
                 AnnotationDesc x = document.getAnnotations().getActiveAnnotation(i);
                 if (x != null) {
-                    lineList.addElement("Line " + (i + 1));
+                    String show = "Line " + (i + 1);
+                    show += " (" + linesStr[i].trim() + " )";
+                    lineList.addElement(show);
                 }
             }
             warningLineList.setModel(lineList);
